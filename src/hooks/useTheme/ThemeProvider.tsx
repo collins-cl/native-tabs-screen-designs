@@ -1,4 +1,5 @@
 import { createContext, useContext, type PropsWithChildren } from "react";
+import { ThemeProvider as RouterThemeProvider } from "expo-router";
 import { useColorScheme } from "react-native";
 
 import { DarkTheme, LightTheme } from "./themes";
@@ -12,7 +13,11 @@ export function ThemeProvider({ children }: PropsWithChildren) {
     const theme = systemScheme === "dark" ? DarkTheme : LightTheme;
 
     return (
-        <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+        <ThemeContext.Provider value={theme}>
+            <RouterThemeProvider value={theme}>
+                {children}
+            </RouterThemeProvider>
+        </ThemeContext.Provider>
     );
 }
 
